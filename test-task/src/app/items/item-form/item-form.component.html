@@ -1,0 +1,64 @@
+<div mat-dialog-title>
+  <div class="title">Product form</div>
+</div>
+<div mat-dialog-content class="form">
+
+  <form [formGroup]="group">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Expiration type</mat-label>
+        <mat-select formControlName="expType" (valueChange)="typeChange($event)">
+          <mat-option *ngFor="let t of expTypes" [value]="t.type">{{t.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <app-fields-edit [data]="fields"></app-fields-edit>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Manufacture date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="manufDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="showExpDate">
+      <mat-form-field appearance="outline">
+        <mat-label>Expiration date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="expDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="group.controls.expDate.hasError('early')">
+          Must be after Manufactured date
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <textarea type="text" matInput formControlName="comment"></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <hr>
+
+  <div style="text-align: right">
+    <mat-dialog-actions align="end">
+      <button mat-flat-button mat-dialog-close>Close</button>
+      <button mat-flat-button color="primary" (click)="save()" [disabled]="group.invalid">Save</button>
+    </mat-dialog-actions>
+  </div>
+</div>

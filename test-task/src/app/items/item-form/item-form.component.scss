@@ -1,0 +1,28 @@
+.title {
+  --title-gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.title::before, .title::after {
+  content: '';
+  height: 1px;
+  background-color: silver;
+  flex-grow: 1;
+}
+
+.title::before {
+  margin-right: var(--title-gap);
+}
+
+.title::after {
+  margin-left: var(--title-gap);
+}
+
+.form {
+  padding-top: 1rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+}

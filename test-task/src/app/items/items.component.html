@@ -1,0 +1,7 @@
+<div class="mb-3">
+  <app-table [data]="data" (editId)="edit($event)" (deleteId)="delete($event)"></app-table>
+</div>
+
+<div>
+  <button mat-flat-button color="primary" (click)="showModal()">Add product</button>
+</div>
